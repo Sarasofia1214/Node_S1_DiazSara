@@ -1,1 +1,2 @@
-console.log("Hola mundo");
+import ask from camper.js
+
