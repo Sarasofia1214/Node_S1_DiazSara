@@ -145,7 +145,7 @@ export async function menuCoordinador() {
 // 📁 main.js
 import { ask, closeRL } from './utils.js';
 import { campers } from './info_camper.js';
-import { inscribirCamper, mostrarPerfilCamper, salirCampus } from './camper.js';
+import { inscribirCamper, mostrarPerfilCamper, salirCampus } from './infocamper.js';
 import { subMenuTrainer } from './trainer.js';
 import { menuCoordinador } from './coordinador.js';
 
