@@ -1,31 +1,16 @@
-// info_camper.js
 import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+import { uri } from "./conexion.js";
 
-dotenv.config();
+export let campers = [];
 
-const uri = process.env.MONGO_URI;
-const dbName = process.env.DB_NAME;
-const client = new MongoClient(uri);
-
-let estudiantes = [];
-
-async function conectarYObtenerCampers() {
+export async function cargarCampersDesdeMongo() {
+  const client = new MongoClient(uri);
   try {
     await client.connect();
-    console.log("Conectado a MongoDB");
-
-    const db = client.db(dbName);
-    const coleccion = db.collection("estudiantes");
-
-    estudiantes = await coleccion.find().toArray();
-    console.log(`📋 Se cargaron ${estudiantes.length} campers`);
-  } catch (error) {
-    console.error(" Error al conectar o cargar campers:", error.message);
+    const db = client.db("campuslands");
+    const collection = db.collection("campers");
+    campers = await collection.find().toArray();
+  } finally {
+    await client.close();
   }
 }
-
-// Ejecutamos al importar este módulo
-await conectarYObtenerCampers();
-
-export { estudiantes };
