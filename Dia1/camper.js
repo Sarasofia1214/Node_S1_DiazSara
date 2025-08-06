@@ -10,9 +10,11 @@ const prompt = promptSync();
 export async function mostrarPerfilCamper() {
   const id = prompt("🔎 Ingrese el ID del camper: ");
   const db = await conectarDB();
-  const coleccion = db.collection("Estudiantes");
+  const coleccion = db.collection("estudiantes");
 
   const camper = await coleccion.findOne({ ID: Number(id) });
+
+  console.log("🧪 Resultado de búsqueda en MongoDB:", camper); // <- Aquí ves si lo encontró
 
   if (camper) {
     console.log(`\n📄 Perfil del camper:
@@ -37,12 +39,13 @@ export async function mostrarPerfilCamper() {
 }
 
 
+
 /**
  * Inscribir un nuevo camper.
  */
 export async function inscribirCamper() {
   const db = await conectarDB();
-  const coleccion = db.collection("Estudiantes");
+  const coleccion = db.collection("estudiantes");
 
   const id = Number(prompt("🆔 Ingrese ID del nuevo camper: "));
   const existe = await coleccion.findOne({ ID: id });
@@ -71,7 +74,7 @@ export async function inscribirCamper() {
  */
 export async function salirCampus() {
   const db = await conectarDB();
-  const coleccion = db.collection("Estudiantes");
+  const coleccion = db.collection("estudiantes");
 
   const id = Number(prompt("🆔 Ingrese el ID del camper que va a salir: "));
   const resultado = await coleccion.updateOne(
