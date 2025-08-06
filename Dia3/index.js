@@ -12,9 +12,13 @@ pedro.saludar();
 const cuentaBancaria= require ('./models/cuentaBancaria.js');
 const cuenta= new cuentaBancaria ('Pedro',1000);
 cuenta.depositar(500);
-console.log(cuenta.verSaldo())
+console.log(cuenta.verSaldo());
 
 
-const perro= require('./models/perro.js')
+const perro= require('./models/perro.js');
 const animal1= new perro("Paco");
 animal1.hablar();
+
+const gato= require('./models/gato.js');
+const animal2 = new gato ("Mechas");
+animal2.hablar();
