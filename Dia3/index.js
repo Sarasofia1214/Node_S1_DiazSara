@@ -22,3 +22,5 @@ animal1.hablar();
 const gato= require('./models/gato.js');
 const animal2 = new gato ("Mechas");
 animal2.hablar();
+
+
