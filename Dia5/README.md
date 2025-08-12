@@ -59,7 +59,7 @@ export default BookRepository;
 
 # 2. Open-Closed Principle (OCP)
 
-Este principio establece que las clases deben estar **abiertas para extensión pero cerradas para modificación**.  
+Este principio establece que las clases deben estar **abiertas para extensión pero cerradas para modificación**.  Debe haber un creciomiento vertical, es Herencia ya que se enfoca en ammpliar basandose en lo de atras sin tocar este.
 
 En nuestra **Book Management App**, utilizaremos **herencia** para cumplir este principio.
 
@@ -75,7 +75,6 @@ Tenemos dos clases que heredan de la clase `Book`:
 Representa un tipo específico de libro (ficción) y extiende la clase `Book`.
 
 ```JS
-// fictionBook.ts
 
 import Book from './book';
 
@@ -85,8 +84,6 @@ export default FictionBook;
 ```
 
 ```JS
-
-// nonFictionBook.ts
 
 import Book from './book';
 
@@ -98,7 +95,8 @@ export default NonFictionBook;
 # 3. Liskov Substitution Principle (LSP)
 
 Este principio establece que los **objetos de una superclase deben poder ser reemplazados por objetos de sus subclases** sin afectar la corrección del programa.  
-
+Se debe poder usar la subclase creada, y bede estar bien estrucutrada que debe poder funcionar sin necesidad de la clase padre.
+Para esto se separan las interfaces, teniendo un estandar, algo que todos tienen en la clase super y crear otras subclases basadas en esta general ya que tienen exepciones.
 En nuestra **Book Management App**, nos aseguraremos de que las subclases se comporten como se espera cuando se utilicen en lugar de la clase padre.
 
 ---
