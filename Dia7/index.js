@@ -66,8 +66,8 @@ function createItem(){
     showMenu();
 };
 
-function listItems(loadData){
-    let table=loadData;
-    console.log(table);
+function listItems(){
+    let data=loadData;
+    console.log(data);
 }
 
