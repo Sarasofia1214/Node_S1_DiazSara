@@ -59,7 +59,7 @@ export default BookRepository;
 
 # 2. Open-Closed Principle (OCP)
 
-Este principio establece que las clases deben estar **abiertas para extensión pero cerradas para modificación**.  Debe haber un creciomiento vertical, es Herencia ya que se enfoca en ammpliar basandose en lo de atras sin tocar este.
+Este principio establece que las clases deben estar **abiertas para extensión pero cerradas para modificación**.  Debe haber un crecimiento vertical, es Herencia ya que se enfoca en ampliar basandose en lo de atras sin tocar este.
 
 En nuestra **Book Management App**, utilizaremos **herencia** para cumplir este principio.
 
@@ -95,7 +95,7 @@ export default NonFictionBook;
 # 3. Liskov Substitution Principle (LSP)
 
 Este principio establece que los **objetos de una superclase deben poder ser reemplazados por objetos de sus subclases** sin afectar la corrección del programa.  
-Se debe poder usar la subclase creada, y bede estar bien estrucutrada que debe poder funcionar sin necesidad de la clase padre.
+Se debe poder usar la subclase creada, y dede estar bien estrucutrada que debe poder funcionar sin necesidad de la clase padre.
 Para esto se separan las interfaces, teniendo un estandar, algo que todos tienen en la clase super y crear otras subclases basadas en esta general ya que tienen exepciones.
 En nuestra **Book Management App**, nos aseguraremos de que las subclases se comporten como se espera cuando se utilicen en lugar de la clase padre.
 
@@ -110,8 +110,6 @@ Podemos agregar un método `getType()` a cada subclase para que retorne su tipo 
 ### `FictionBook`
 
 ```JS
-// fictionBook.ts
-
 import Book from './book';
 
 class FictionBook extends Book {
@@ -135,13 +133,30 @@ class NonFictionBook extends Book {
 
 export default NonFictionBook;
 ```
-
+No se comportan de igual manera(comportamiento)
 
 # 4. Interface Segregation Principle (ISP)
 
 Este principio establece que **una clase no debe ser obligada a implementar una interfaz que no utiliza**.  
+Los metodos tienen que ver con la clase y no deben haber innecesarios.
+Cuando se tiene una clase se establecen sus metodos, 
+
 
 En nuestra **Book Management App**, crearemos **interfaces separadas** para asegurarnos de que cada clase implemente únicamente los métodos relevantes.
+
+Artista = pintarCuadro, CanteCanciones, 
+pintor extiende artista 
+pitarCuadro();
+CanteCancion();
+
+############################################
+
+Se debe crear interfeces mas especificas:
+
+class Artistapintor;
+class Artistcantante;
+class artistabailarin;
+
 
 ---
 
@@ -170,6 +185,8 @@ export default BookRepositoryInterface;
 
 Este principio establece que **los módulos de alto nivel no deben depender de los módulos de bajo nivel**.  
 En su lugar, **ambos deben depender de abstracciones**.
+
+Jererquia, crecimiento vertical hacia abajo, que el adre no dependa de los hijos.
 
 ---
 
