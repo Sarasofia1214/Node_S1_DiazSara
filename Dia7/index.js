@@ -1,3 +1,4 @@
+// Modelo
 const prompt= require('prompt-sync')();//Entradas por consola
 const path = "db.json";//Direccionar hacia la base de datos
 const fs= require('fs');//Manejo de Archivos Locales
@@ -13,6 +14,9 @@ function loadData(){
 function saveData(data){
     fs.writeFileSync(path,JSON.stringify(data));
 }
+
+// Vista
+
 function showMenu() {
   console.log("\n=== CRUD en consola con Node.js ===");
   console.log("1. Crear elemento");
@@ -24,6 +28,7 @@ function showMenu() {
   let opcionUsuario = prompt("Selecciona una opción: ");
   return opcionUsuario;
 }
+
 
 function handleMenu(option) {
   switch (option) {
@@ -52,6 +57,9 @@ while(booleanito){
     let opcionUsuario= showMenu();
     handleMenu(opcionUsuario);
 }
+
+
+// Controlador 
 
 function createItem(){
     let nombre = prompt("Ingresa un nombre: ");
