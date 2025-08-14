@@ -66,8 +66,29 @@ function createItem(){
     showMenu();
 };
 
-function listItems(){
-    let data=loadData;
-    console.log(data);
+function listItems() {
+    console.log("\n=== Lista de elementos ===");
+    console.table(loadData());
+};
+
+function updateItem() {
+    let data = loadData();
+    console.table(data);
+    let id = prompt("ID a actualizar: ");
+    let item = data.find(e => e.id == id);
+    if (!item) return console.log(" No encontrado.");
+    item.nombre = prompt("Nuevo nombre: ");
+    saveData(data);
+    console.log("Actualizado.");
 }
+
+function deleteItem() {
+    let data = loadData();
+    console.table(data);
+    let id = prompt("ID a eliminar: ");
+    data = data.filter(e => e.id != id);
+    saveData(data);
+    console.log(" Eliminado.");
+}
+
 
