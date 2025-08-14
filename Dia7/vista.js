@@ -1,8 +1,7 @@
-// vista.js
 const prompt = require('prompt-sync')();
 
 function showMenu() {
-    console.log("\n=== CRUD en consola con Node.js ===");
+    console.log("\n=== CRUD");
     console.log("1. Crear elemento");
     console.log("2. Listar elementos");
     console.log("3. Actualizar elemento");
@@ -11,20 +10,20 @@ function showMenu() {
     return prompt("Selecciona una opción: ");
 }
 
-function pedirNombre() {
+function nombre() {
     return prompt("Ingresa un nombre: ");
 }
 
-function pedirId(mensaje) {
+function id(mensaje) {
     return prompt(mensaje);
 }
 
-function mostrarTabla(data) {
+function tabla(data) {
     console.table(data);
 }
 
-function mostrarMensaje(mensaje) {
+function mensaje(mensaje) {
     console.log(mensaje);
 }
 
-module.exports = { showMenu, pedirNombre, pedirId, mostrarTabla, mostrarMensaje };
+module.exports = { showMenu, nombre, id, tabla, mensaje };

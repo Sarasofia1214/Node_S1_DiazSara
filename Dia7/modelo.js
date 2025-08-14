@@ -11,7 +11,7 @@ function loadData() {
 }
 
 function saveData(data) {
-    fs.writeFileSync(path, JSON.stringify(data, null, 2));
+    fs.writeFileSync(path, JSON.stringify(data));
 }
 
 module.exports = { loadData, saveData };
