@@ -63,7 +63,7 @@ while(booleanito){
 
 function createItem(){
     let nombre = prompt("Ingresa un nombre: ");
-    const id = Date.now();// ID Unico (Paso de milisegundos desde el 1 de Enero de 1970)
+    const id = Date.now();
     const data = loadData();
     data.push({
         id,nombre
