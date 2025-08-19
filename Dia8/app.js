@@ -1,4 +1,27 @@
-const {ItemModel} = require("./models/ItemModel");
+const prompt = require("prompt-sync")();
+
+const {ItemModel}= require('./models/itemModel');
+const {ItemView} = require('./views/itemView');
+const {ItemController}= require('./controllers/itemController');
+
 const model = new ItemModel();
-model.crear({nombre:"Lapicero", descripcion:"Negro"});
-console.log(model.listar());
+const view = ItemView;
+const controller = new ItemController({model,view,prompt});
+
+function main(){
+    let salir = false;
+    while(!salir){
+        view.mostrarMenu();
+        const op = view.pedirOpcion(prompt);
+        switch(op){
+            case "1":
+                controller.crear();
+            case "0":
+                salir = true;
+                view.mostrarMensaje("¡Hasta Luego!");
+            default:
+                view.mostrarMensaje("Opción no válida")
+        }
+    }
+}
+main();
