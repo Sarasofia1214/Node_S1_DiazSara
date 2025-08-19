@@ -1,29 +1,35 @@
-// La vista busca centralizar toda la interacción
-// por consola, lo cual incluye menú, prompts y 
-// formatos de salida
-
 const ItemView = {
-    mostrarMenu() {
-        console.log("\n=== CRUD de Items ===");
-        console.log("1) Crear");
-        console.log("2) Listar");
-        console.log("3) Ver por ID");
-        console.log("4) Actualizar");
-        console.log("5) Eliminar");
-        console.log("0) Salir");
-
+    mostrarMenu(){
+        console.log("==== CRUD en Consola con Node.js ====")
+        console.log("1. Crear elemento")
+        console.log("2. Listar elementos")
+        console.log("3. Actualizar elemento")
+        console.log("4. Eliminar elemento")
+        console.log("5. Salir")
     },
-    pedirOpcion(prompt){
-        const op= prompt("Elige una opción: ");
-        return op.trim();
+    OpcionMenu(prompt){
+        let opcionUsuario = prompt("Ingrese una opcion: ")
+        return opcionUsuario.trim();
+
     },
     pedirDatosCreacion(prompt){
-        const nombre = prompt("Nombre: ").trim();
-        const descripcion = prompt("Descripción: ").trim();
-        return {nombre,descripcion};
+        const nombre = prompt("Nombre ").trim();
+        const descripcion = prompt("Descripcion ").trim();
+        return {nombre, descripcion}
     },
     mostrarMensaje(msg){
-        console.log(`\n${msg}`);
+        if (typeof msg === "string") {
+          console.log("\n" + msg);
+        } else {
+          // Objetos/arrays: muéstralos legibles
+          console.log("\n" + JSON.stringify(msg, null, 2));
+          // Alternativa: console.dir(msg, { depth: null });
+        }
+    },
+    idActualizar(prompt){
+        const id = prompt("id: ")
+        return id.trim();
     }
 }
-module.exports={ItemView}
+
+module.exports = {ItemView}

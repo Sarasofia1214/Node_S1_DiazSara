@@ -1,27 +1,37 @@
 const prompt = require("prompt-sync")();
-
-const {ItemModel}= require('./models/itemModel');
-const {ItemView} = require('./views/itemView');
-const {ItemController}= require('./controllers/itemController');
+const {ItemModel} = require("./Models/itemModel.js");
+const {ItemView} = require("./Views/itemView.js");
+const {ItemController} = require("./Controllers/itemController.js");
 
 const model = new ItemModel();
 const view = ItemView;
 const controller = new ItemController({model,view,prompt});
 
 function main(){
-    let salir = false;
-    while(!salir){
+    let booleanito=false;
+    while (!booleanito){
         view.mostrarMenu();
-        const op = view.pedirOpcion(prompt);
-        switch(op){
+        const op = view.OpcionMenu(prompt);
+        switch (op) {
             case "1":
                 controller.crear();
-            case "0":
-                salir = true;
-                view.mostrarMensaje("¡Hasta Luego!");
+                break;
+            case "2":
+                controller.listar();
+                break;
+            case "3":
+                controller.actualizar();
+                break;
+            case "4":
+                controller.eliminar();
+                break;
+            case "5":
+                booleanito=true;
+                break;
             default:
-                view.mostrarMensaje("Opción no válida")
+                console.log("Opcion no valida")
+                break;
         }
-    }
+    };
 }
 main();

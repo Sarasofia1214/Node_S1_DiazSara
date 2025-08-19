@@ -1,54 +1,54 @@
-// Modelo + repositorio en memoria para Items
 
-//Creando la clase Item
-//Crear el  ItemModel con un arreglo privado y métodos CRUD
+
+
 class Item{
-    constructor({id, nombre, descripcion}){
+    constructor({id,nombre,descripcion}){
         this.id=id;
         this.nombre=nombre;
         this.descripcion=descripcion;
-        this.creadoEn=new Date();
-        this.actualizadoEn= new Date();
+        this.creadoEn = new Date();
+        this.actualizadoEn = new Date();
     }
 }
 
-// ItemModel contiane los metodos 
 class ItemModel{
     constructor(){
-         this._items=[];
-         this._seq=1; // Uno para que en un futuro vaya incrementando
+        this._items = [];
+        this._seq = 1;
     }
-    crear({nombre, descripcion}){
-        const nuevo= new Item({
-            id: this._seq++, //Asigna id al nuevo producto
-            nombre: (nombre || "").trim(), // Para que hacepte el valor ingresado o vacio y trim para ignorar espacios
+
+    crear({nombre,descripcion}){
+        const nuevo = new Item({
+            id:this._seq++,
+            nombre:(nombre || "").trim(), 
             descripcion:(descripcion || "").trim()
         });
         this._items.push(nuevo);
         return nuevo;
     }
-    listar(){
-        return[...this._items] // Los tres puntos significa que saca la copia
+    Listar(){
+        return [...this._items];
     }
     buscarPorId(id){
-        return this._items.find(i => i["id"] === Number(id)) || null;
+        return this._items.find(i => i.id === Number(id)) || null;
     }
-
-    actualizar(id, {nombre,descripcion}){
-        const item= this.buscarPorId(id); //Reutilizando un método
-        if(!item) return null;
-        if (typeof nombre==="string") item.nombre = nombre.trim(); // Verifica que sea cadana de texto y lueog si lo ingresa
-        if (typeof descripcion==="string") item.descripcion = descripcion.trim(); 
-        item.actualizadoEn= new Date();
-        return item;
+    actualizar(id,{nombre,descripcion}){
+        const item = this.buscarPorId(id);
+        if(item){
+            if(typeof nombre === "string") item.nombre = (nombre || "").trim();
+            if(typeof descripcion === "string") item.descripcion = (descripcion || "").trim();
+            item.actualizadoEn = new Date();
+            return item;
+        }
+        return null;
     }
-
     eliminar(id){
-        const idx = this._items.findIndex(i => i["id"] === Number(id)); // idx = Abreviacion de indice
-        if (idx === -1) return false;
-        this._items.splice(idx,1); // splice es para eliminar tantos # en una posicion indices = [posicion, cantidad a eliminar]
+        const index = this._items.findIndex(i => i.id === Number(id));
+        if(index === -1)return false;
+        this._items.splice(index,1);
         return true;
+        
     }
 }
 
-module.exports={ItemModel};
+module.exports = {ItemModel};
