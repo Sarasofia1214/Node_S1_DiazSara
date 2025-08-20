@@ -1,3 +1,6 @@
+// El objetivo del controlador es de recibir los inputs
+// de vista, realizar validaciones basicas y coordinar el modelo
+
 class ItemController{
     constructor({model,view,prompt}){
         this.model = model;

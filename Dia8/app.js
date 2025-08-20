@@ -25,7 +25,7 @@ function main(){
             case "4":
                 controller.eliminar();
                 break;
-            case "5":
+            case "0":
                 booleanito=true;
                 break;
             default:

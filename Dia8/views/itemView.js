@@ -1,11 +1,15 @@
+// La vista busca centralizar toda la interacción
+// por consola, lo cual incluye menú, prompts y 
+// formatos de salida
+
 const ItemView = {
     mostrarMenu(){
-        console.log("==== CRUD en Consola con Node.js ====")
+        console.log("\n=== CRUD de Items ===")
         console.log("1. Crear elemento")
         console.log("2. Listar elementos")
         console.log("3. Actualizar elemento")
         console.log("4. Eliminar elemento")
-        console.log("5. Salir")
+        console.log("0. Salir")
     },
     OpcionMenu(prompt){
         let opcionUsuario = prompt("Ingrese una opcion: ")
@@ -21,9 +25,7 @@ const ItemView = {
         if (typeof msg === "string") {
           console.log("\n" + msg);
         } else {
-          // Objetos/arrays: muéstralos legibles
           console.log("\n" + JSON.stringify(msg, null, 2));
-          // Alternativa: console.dir(msg, { depth: null });
         }
     },
     idActualizar(prompt){
