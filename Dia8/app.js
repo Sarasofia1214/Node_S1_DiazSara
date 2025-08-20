@@ -1,7 +1,7 @@
 const prompt = require("prompt-sync")();
-const {ItemModel} = require("./Models/itemModel.js");
-const {ItemView} = require("./Views/itemView.js");
-const {ItemController} = require("./Controllers/itemController.js");
+const {ItemModel} = require("./models/itemModel.js");
+const {ItemView} = require("./views/itemView.js");
+const {ItemController} = require("./controllers/itemController.js");
 
 const model = new ItemModel();
 const view = ItemView;

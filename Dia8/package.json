@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "init": "^0.1.2",
     "inti": "^0.0.0",
     "prompt-sync": "^4.2.0"
   }
