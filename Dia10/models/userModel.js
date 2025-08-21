@@ -21,7 +21,9 @@ class UserModel{
             throw new Error ('Error tipado de datos ingresados');
         }
         const db= await conenectDb.connectDB.connect();
-        const result = await db.collection('usuarios').insertOne(usuario);
+        const result = await db.collection('usuarios').insertOne(usuario); 
+        let idObjeto= result.insertId;
+        await conenectDb.dissconect;
         return result.insertId;
     }
     async listar(){
