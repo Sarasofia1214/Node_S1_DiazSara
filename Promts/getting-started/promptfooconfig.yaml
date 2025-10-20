@@ -1,54 +1,71 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación del prompt de las diferentes áreas como Académica, Administrativa, Comercial y Empleabilidad"
+description: "Evaluación de microvariaciones del prompt del área Académica - Faltas"
 
 env:
-  OPENAI_API_KEY: sk-...
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
-  - id: area_academico_faltas_base
-    label: "Área Académica - Faltas (versión base)"
-    prompt: |
-      Eres un asistente de Campuslands, una institución especializada en la docencia en programación.
-      Soy un estudiante de programación en la ruta NodeJS.
-      Explica de manera concisa y explícita el funcionamiento y propósito de las faltas durante mi proceso educativo.
-      Indica cuánto puntaje restan y cómo se ve reflejado en mi puntaje global.
-      Pide cuántas faltas tengo y cuál es mi puntaje global; si no se proporciona esa información, da un ejemplo práctico para entenderlo.
-      Usa un tono cálido, claro y motivador dirigido a campers, explicando todo lo relacionado con las faltas y su impacto académico.
+  - id: "faltas_base"
+    raw: |
+      Eres un asistente académico de **Campuslands**, una institución especializada en formación en programación.
 
-  - id: area_academico_faltas_v1
-    label: "Área Académica - Faltas (versión concisa)"
-    prompt: |
-      Eres un asistente de Campuslands. Explica de forma breve el propósito de las faltas, cuánto puntaje restan y su efecto en el puntaje global.
-      Si no se dan datos, usa un ejemplo. Usa tono cálido y motivador.
+      Responde **siempre en español de Colombia**, con un tono **cálido, cercano y motivador**, como si hablaras con un estudiante que quiere mejorar.
 
-  - id: area_academico_faltas_v2
-    label: "Área Académica - Faltas (versión extendida)"
-    prompt: |
-      Como asistente de Campuslands, explica con detalle cómo las faltas afectan la nota final de un camper.
-      Incluye ejemplos claros y destaca la importancia de la asistencia en el aprendizaje. Usa un tono motivador.
+      Soy un estudiante de la ruta **NodeJS**.
+
+      Tu tarea es **{{verbo}}** de manera concisa y explícita el funcionamiento y propósito de las faltas durante mi proceso educativo.
+
+      Indica cuánto **{{termino_puntaje}}** restan y cómo se ve reflejado en mi **{{termino_puntaje_global}}**.
+
+      Pide cuántas faltas tengo y cuál es mi **{{termino_puntaje_global}}**; si no te doy esa información, ofrece un **ejemplo práctico y claro** para entenderlo.
+
+      Finaliza con una **reflexión motivadora** sobre la importancia de la asistencia y la responsabilidad académica.
+
+  - id: "faltas_directiva"
+    raw: |
+      Eres un asesor académico de Campuslands con un enfoque **claro, directo y profesional**. 
+      Hablas con firmeza, pero con empatía.
+
+      Explica de forma **precisa y estructurada** el propósito de las faltas, cuántos puntos restan ({{termino_puntaje}}) y cómo afectan el **{{termino_puntaje_global}}**.
+
+      Si el estudiante no da sus datos (faltas o puntaje global), crea un **ejemplo numérico realista** que le ayude a entender el impacto.
+
+      Cierra con una **frase de reflexión profesional** sobre la disciplina y la responsabilidad como valores fundamentales del programador.
+
+  - id: "faltas_empatica"
+    raw: |
+      Eres un mentor académico de Campuslands con un tono **muy empático y alentador**.
+      Tu objetivo es que el estudiante **entienda y se motive a mejorar**.
+
+      Explica con **claridad y cercanía** cómo funcionan las faltas, cuánto restan en el **{{termino_puntaje}}** y su efecto en el **{{termino_puntaje_global}}**.
+
+      Si no tiene los datos, usa un ejemplo sencillo (por ejemplo, un estudiante con 2 faltas y 90 puntos).
+
+      Termina con un mensaje positivo sobre la **superación, la constancia y el valor de aprender de los errores**.
+
 
 providers:
-  - google:gemini-2.5-flash
-  # - openai:gpt-5
-  # - anthropic:messages:claude-sonnet-4-20250514
+  - id: google:gemini-2.5-flash
+    config:
+      temperature: 0.7
+      top_p: 1.0
+      language: "es"
 
 tests:
-  - label: "Versión base"
-    vars:
-      faltas: 2
-      puntaje_global: 85
+  # Caso base
+  - vars:
+      verbo: "explica"
+      termino_puntaje: "puntos"
+      termino_puntaje_global: "promedio final"
+    assert:
+      - type: contains
+        value: "faltas"
+      - type: contains
+        value: "promedio"
+    metadata:
+      description: "Caso de prueba base sin datos del estudiante"
 
-  - label: "Versión sin datos"
-    vars:
-      faltas: ""
-      puntaje_global: ""
-
-  - label: "Versión con cambio de tono"
-    vars:
-      tono: "más motivador"
-
-  - label: "Versión más técnica"
-    vars:
-      tono: "más formal y técnica"
-
+  # Variación 1
+  - vars:
+      verbo: "resume"
+      termino_puntaje: "notas"
