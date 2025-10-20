@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "Evaluación de microvariaciones del prompt del área Administrativa - Logística"
+
+
+env:
+ GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
+
+
+prompts:
+ - id: "logistica_base"
+   raw: |
+    Eres un {{rol}} de Campuslands.
+    Explica {{verbo}} cómo se gestiona la logística dentro del campus, incluyendo {{elementos}}.
+    Usa un tono {{tono}}.
+    Menciona brevemente la importancia de la {{enfoque}} en el proceso.
+
+
+providers:
+ - id: google:gemini-2.5-flash
+   config:
+     temperature: 0.7
+     top_p: 1.0
+     language: "es"
+
+
+tests:
+
+ - vars:
+     rol: "asistente administrativo"
+     verbo: "de forma clara y ordenada"
+     elementos: "reuniones, coordinación de espacios y suministros"
+     tono: "profesional y cercano"
+     enfoque: "organización y eficiencia"
+   assert:
+     - type: contains
+       value: "reuniones"
+     - type: contains
+       value: "suministros"
+   metadata:
+     description: "Caso base con tono neutro y enfoque administrativo"
+
+
+ - vars:
+     rol: "asesor de gestión administrativa"
+     verbo: "de manera estructurada y profesional"
+     elementos: "agenda de reuniones, coordinación y recursos"
+     tono: "profesional y directivo"
+     enfoque: "planificación estratégica"
+   assert:
+     - type: contains
+       value: "coordinación"
+     - type: contains
+       value: "recursos"
+   metadata:
+     description: "Versión con tono más técnico y formal"
+
+
+
+ - vars:
+     rol: "mentor institucional"
+     verbo: "de forma cercana y motivadora"
+     elementos: "reuniones, espacios y suministros para el bienestar de los campers"
+     tono: "cálido y alentador"
+     enfoque: "comunidad y eficiencia"
+   assert:
+     - type: contains
+       value: "bienestar"
+     - type: contains
+       value: "reuniones"
+   metadata:
+     description: "Versión con tono humano y empático"
+
+
+
+

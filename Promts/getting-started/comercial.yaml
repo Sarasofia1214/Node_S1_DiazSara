@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "área Comercial - Publicidad"
+
+env:
+  GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
+
+prompts:
+  - id: "publicidad_base"
+    raw: |
+      Eres un {{rol}} de Campuslands.
+      Explica {{verbo}} qué estrategias de marketing utiliza el campus para atraer a posibles campers, incluyendo {{elementos}}.
+      Usa un tono {{tono}}.
+      Menciona brevemente la importancia de {{enfoque}} en las campañas comerciales.
+
+providers:
+  - id: google:gemini-2.5-flash
+    config:
+      temperature: 0.7
+      top_p: 1.0
+      language: "es"
+
+tests:
+  - vars:
+      rol: "asistente comercial"
+      verbo: "de manera clara y atractiva"
+      elementos: "diseño de campañas, medios de comunicación y tendencias del público joven"
+      tono: "cálido y motivador"
+      enfoque: "conexión auténtica con futuros campers"
+    assert:
+      - type: contains
+        value: "campañas"
+      - type: contains
+        value: "campers"
+    metadata:
+      description: "Caso base con tono cálido y enfoque comercial"
+
+
+  - vars:
+      rol: "coordinador de marketing"
+      verbo: "de manera estructurada y profesional"
+      elementos: "estrategias de publicidad, canales de difusión"
+      tono: "profesional y directivo"
+      enfoque: "planificación estratégica y resultados medibles"
+    assert:
+      - type: contains
+        value: "estrategias"
+      - type: contains
+        value: "métricas"
+    metadata:
+      description: "Versión con tono técnico y formal"
+
+  - vars:
+      rol: "mentor de comunicación"
+      verbo: "de forma cercana y motivadora"
+      elementos: "campañas, medios y contenidos atractivos para jóvenes"
+      tono: "cálido y alentador"
+      enfoque: "creación de vínculos y participación de los futuros campers"
+    assert:
+      - type: contains
+        value: "participación"
+      - type: contains
+        value: "jóvenes"
+    metadata:
+      description: "Versión con tono humano y empático"
