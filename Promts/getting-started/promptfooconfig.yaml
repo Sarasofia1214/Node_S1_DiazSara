@@ -1,48 +1,16 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación de microvariaciones del prompt del área Académica - Faltas"
+description: "Evaluación de microvariaciones del prompt del área Administrativa - Logística"
 
 env:
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
-  - id: "faltas_base"
+  - id: "logistica_base"
     raw: |
-      Eres un asistente académico de **Campuslands**, una institución especializada en formación en programación.
-
-      Responde **siempre en español de Colombia**, con un tono **cálido, cercano y motivador**, como si hablaras con un estudiante que quiere mejorar.
-
-      Soy un estudiante de la ruta **NodeJS**.
-
-      Tu tarea es **{{verbo}}** de manera concisa y explícita el funcionamiento y propósito de las faltas durante mi proceso educativo.
-
-      Indica cuánto **{{termino_puntaje}}** restan y cómo se ve reflejado en mi **{{termino_puntaje_global}}**.
-
-      Pide cuántas faltas tengo y cuál es mi **{{termino_puntaje_global}}**; si no te doy esa información, ofrece un **ejemplo práctico y claro** para entenderlo.
-
-      Finaliza con una **reflexión motivadora** sobre la importancia de la asistencia y la responsabilidad académica.
-
-  - id: "faltas_directiva"
-    raw: |
-      Eres un asesor académico de Campuslands con un enfoque **claro, directo y profesional**. 
-      Hablas con firmeza, pero con empatía.
-
-      Explica de forma **precisa y estructurada** el propósito de las faltas, cuántos puntos restan ({{termino_puntaje}}) y cómo afectan el **{{termino_puntaje_global}}**.
-
-      Si el estudiante no da sus datos (faltas o puntaje global), crea un **ejemplo numérico realista** que le ayude a entender el impacto.
-
-      Cierra con una **frase de reflexión profesional** sobre la disciplina y la responsabilidad como valores fundamentales del programador.
-
-  - id: "faltas_empatica"
-    raw: |
-      Eres un mentor académico de Campuslands con un tono **muy empático y alentador**.
-      Tu objetivo es que el estudiante **entienda y se motive a mejorar**.
-
-      Explica con **claridad y cercanía** cómo funcionan las faltas, cuánto restan en el **{{termino_puntaje}}** y su efecto en el **{{termino_puntaje_global}}**.
-
-      Si no tiene los datos, usa un ejemplo sencillo (por ejemplo, un estudiante con 2 faltas y 90 puntos).
-
-      Termina con un mensaje positivo sobre la **superación, la constancia y el valor de aprender de los errores**.
-
+      Eres un {{rol}} de Campuslands.
+      Explica {{verbo}} cómo se gestiona la logística dentro del campus, incluyendo {{elementos}}.
+      Usa un tono {{tono}}.
+      Menciona brevemente la importancia de la {{enfoque}} en el proceso.
 
 providers:
   - id: google:gemini-2.5-flash
@@ -54,18 +22,46 @@ providers:
 tests:
   # Caso base
   - vars:
-      verbo: "explica"
-      termino_puntaje: "puntos"
-      termino_puntaje_global: "promedio final"
+      rol: "asistente administrativo"
+      verbo: "de forma clara y ordenada"
+      elementos: "reuniones, coordinación de espacios y suministros"
+      tono: "profesional y cercano"
+      enfoque: "organización y eficiencia"
     assert:
       - type: contains
-        value: "faltas"
+        value: "reuniones"
       - type: contains
-        value: "promedio"
+        value: "suministros"
     metadata:
-      description: "Caso de prueba base sin datos del estudiante"
+      description: "Caso base con tono neutro y enfoque administrativo"
 
-  # Variación 1
+  # Variación 1 - tono directivo
   - vars:
-      verbo: "resume"
-      termino_puntaje: "notas"
+      rol: "asesor de gestión administrativa"
+      verbo: "de manera estructurada y profesional"
+      elementos: "agenda de reuniones, coordinación y recursos"
+      tono: "profesional y directivo"
+      enfoque: "planificación estratégica"
+    assert:
+      - type: contains
+        value: "coordinación"
+      - type: contains
+        value: "recursos"
+    metadata:
+      description: "Versión con tono más técnico y formal"
+
+  # Variación 2 - tono empático
+  - vars:
+      rol: "mentor institucional"
+      verbo: "de forma cercana y motivadora"
+      elementos: "reuniones, espacios y suministros para el bienestar de los campers"
+      tono: "cálido y alentador"
+      enfoque: "comunidad y eficiencia"
+    assert:
+      - type: contains
+        value: "bienestar"
+      - type: contains
+        value: "reuniones"
+    metadata:
+      description: "Versión con tono humano y empático"
+
