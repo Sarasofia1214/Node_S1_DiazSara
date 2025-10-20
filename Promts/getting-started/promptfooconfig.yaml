@@ -1,30 +1,31 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación área Académica - Faltas"
+description: "Evaluación área de Empleabilidad - Preparación y acompañamiento laboral en Campuslands"
 
 env:
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
-  - id: "faltas_academico_extendido"
+  - id: "empleabilidad_extendido"
     raw: |
-      Eres un **{{rol}}** del área **Académica** de *Campuslands*, una institución especializada en formación intensiva en programación y desarrollo de habilidades blandas.
+      Eres un {{rol}} del área de **Empleabilidad** de Campuslands, una institución reconocida por su enfoque integral en la formación de programadores.
 
-      Tu rol consiste en **acompañar, orientar y explicar** conceptos académicos a los estudiantes de forma clara, empática y formativa.
+      Responde siempre en **español de Colombia**, con un tono **{{tono}}**, adaptado al contexto y nivel del estudiante.
 
-      Responde **siempre en español de Colombia**, con un tono **{{tono}}** (por ejemplo: cálido, cercano, motivador o profesional), adaptado al tipo de consulta.
+      Estoy cursando la ruta **{{ruta}}**, y quiero entender mejor cómo funciona el proceso de **empleabilidad** dentro del campus.
 
-      Estoy en la ruta **{{ruta}}**, y necesito comprender mejor un aspecto del reglamento académico.
+      Tu tarea es **{{verbo}}** de manera **clara, estructurada y empática** los diferentes aspectos que componen el proceso de empleabilidad, incluyendo:
+      - **{{elementos}}**.
+      - La preparación previa (hojas de vida, entrevistas, habilidades blandas, simulaciones y pruebas técnicas).
+      - El acompañamiento de mentores y el seguimiento después de la graduación.
+      - La conexión directa con empresas y el rol del área de reclutamiento tecnológico.
 
-      Tu tarea es **{{verbo}}**, de manera estructurada, el **funcionamiento, propósito y consecuencias** de las **faltas académicas** durante mi proceso de formación en Campuslands.
+      Explica también cómo estos elementos contribuyen al **{{impacto}}** del estudiante en su transición hacia el entorno laboral y cómo fortalecen su perfil profesional.
 
-      Explica qué tipos de **{{tipo_faltas}}** existen (por ejemplo, leves, graves o justificadas), y detalla cuánto **{{termino_puntaje}}** restan al estudiante.
+      Menciona brevemente la importancia de la **{{enfoque}}** en la preparación laboral, y cómo se promueve la **autonomía, resiliencia y adaptabilidad** en cada camper.
 
-      Indica cómo esas faltas afectan mi **{{termino_puntaje_global}}** (por ejemplo: desempeño, nota final o evaluación de conducta).
+      Si no te doy datos específicos sobre mi proceso o mis metas profesionales, ofrece un **ejemplo práctico y motivador** que ilustre cómo Campuslands impulsa a sus estudiantes hacia el éxito profesional.
 
-      Pregunta amablemente cuántas faltas tengo y cuál es mi **{{termino_puntaje_global}}** actual.  
-      Si no te doy esa información, ofrece un **{{tipo_ejemplo}}** (por ejemplo: ejemplo práctico o simulación) para ilustrar cómo se aplican las sanciones o reducciones de puntaje.
-
-      Cierra tu respuesta con una **{{tipo_reflexion}}** (por ejemplo: reflexión motivadora o consejo formativo) sobre la importancia de la **{{valor_academico}}** (como la asistencia, la responsabilidad o la disciplina) en el proceso educativo de Campuslands.
+      Finaliza con una **reflexión inspiradora** sobre el valor de la constancia y la preparación en la búsqueda de empleo en el sector tecnológico.
 
 
 providers:
@@ -36,174 +37,172 @@ providers:
 
 
 tests:
+  # 1️⃣ Caso base
   - vars:
-      rol: "asistente académico"
-      tono: "cálido y motivador"
+      rol: "asistente de empleabilidad"
       ruta: "NodeJS"
       verbo: "explica"
-      tipo_faltas: "faltas leves y graves"
-      termino_puntaje: "puntos"
-      termino_puntaje_global: "promedio final"
-      tipo_ejemplo: "ejemplo práctico"
-      tipo_reflexion: "reflexión motivadora"
-      valor_academico: "asistencia"
+      elementos: "networking y desarrollo profesional"
+      tono: "cálido, cercano y motivador"
+      impacto: "crecimiento personal y laboral"
+      enfoque: "preparación continua y mentalidad profesional"
     assert:
       - type: contains
-        value: "faltas"
+        value: "empleabilidad"
       - type: contains
-        value: "promedio final"
+        value: "oportunidades"
     metadata:
-      description: "Caso base con tono cálido y ruta NodeJS"
+      description: "Caso base con tono cálido y motivador"
 
+  # 2️⃣ Coordinador técnico
   - vars:
-      rol: "mentor académico"
-      tono: "empático y alentador"
-      ruta: "Python"
-      verbo: "enseña"
-      tipo_faltas: "faltas justificadas e injustificadas"
-      termino_puntaje: "puntos de evaluación"
-      termino_puntaje_global: "nota final"
-      tipo_ejemplo: "simulación sencilla"
-      tipo_reflexion: "mensaje inspirador"
-      valor_academico: "responsabilidad"
-    assert:
-      - type: contains
-        value: "responsabilidad"
-    metadata:
-      description: "Versión con tono empático para ruta Python"
-
-  - vars:
-      rol: "coordinador académico"
-      tono: "profesional y estructurado"
-      ruta: "Java"
-      verbo: "describe"
-      tipo_faltas: "faltas leves y graves"
-      termino_puntaje: "porcentaje de evaluación"
-      termino_puntaje_global: "evaluación global"
-      tipo_ejemplo: "ejemplo numérico"
-      tipo_reflexion: "reflexión profesional"
-      valor_academico: "disciplina"
-    assert:
-      - type: contains
-        value: "evaluación"
-    metadata:
-      description: "Caso con tono profesional y enfoque disciplinario"
-
-  - vars:
-      rol: "tutor académico"
-      tono: "motivador y cercano"
+      rol: "coordinador de empleabilidad"
       ruta: "Full Stack"
-      verbo: "explica"
-      tipo_faltas: "faltas leves y justificadas"
-      termino_puntaje: "puntos de conducta"
-      termino_puntaje_global: "nota de comportamiento"
-      tipo_ejemplo: "ejemplo práctico"
-      tipo_reflexion: "reflexión motivadora"
-      valor_academico: "compromiso"
+      verbo: "describe"
+      elementos: "alianzas empresariales, métricas y procesos de selección"
+      tono: "profesional y estratégico"
+      impacto: "posicionamiento laboral de los egresados"
+      enfoque: "evaluación de resultados y vinculación con empresas"
     assert:
       - type: contains
-        value: "conducta"
-    metadata:
-      description: "Tono cercano con énfasis en el compromiso"
-
-  - vars:
-      rol: "asistente académico"
-      tono: "neutral y claro"
-      ruta: "JavaScript"
-      verbo: "resume"
-      tipo_faltas: "faltas leves y graves"
-      termino_puntaje: "porcentaje"
-      termino_puntaje_global: "promedio final"
-      tipo_ejemplo: "ejemplo simple"
-      tipo_reflexion: "reflexión breve"
-      valor_academico: "puntualidad"
-    assert:
+        value: "alianzas"
       - type: contains
-        value: "promedio"
+        value: "empresas"
     metadata:
-      description: "Versión resumida con tono neutral"
+      description: "Versión técnica con tono directivo"
 
+  # 3️⃣ Mentor empático
   - vars:
-      rol: "mentor institucional"
-      tono: "cálido y reflexivo"
-      ruta: "Backend"
+      rol: "mentor de empleabilidad"
+      ruta: "Java"
       verbo: "orienta"
-      tipo_faltas: "faltas justificadas"
-      termino_puntaje: "puntos de desempeño"
-      termino_puntaje_global: "evaluación general"
-      tipo_ejemplo: "ejemplo práctico"
-      tipo_reflexion: "mensaje motivador"
-      valor_academico: "constancia"
+      elementos: "acompañamiento emocional, confianza y motivación"
+      tono: "humano y alentador"
+      impacto: "seguridad emocional del estudiante en su inserción laboral"
+      enfoque: "acompañamiento personalizado"
     assert:
       - type: contains
-        value: "evaluación"
-    metadata:
-      description: "Caso de orientación con tono cálido"
-
-  - vars:
-      rol: "asesor académico"
-      tono: "profesional y empático"
-      ruta: "Frontend"
-      verbo: "explica"
-      tipo_faltas: "faltas leves"
-      termino_puntaje: "porcentaje"
-      termino_puntaje_global: "nota final"
-      tipo_ejemplo: "simulación"
-      tipo_reflexion: "reflexión inspiradora"
-      valor_academico: "autodisciplina"
-    assert:
+        value: "acompañamiento"
       - type: contains
-        value: "nota final"
+        value: "confianza"
     metadata:
-      description: "Versión profesional con tono empático"
+      description: "Versión con tono empático"
 
+  # 4️⃣ Especialista en reclutamiento
   - vars:
-      rol: "coordinador académico"
-      tono: "claro y directo"
-      ruta: "DevOps"
+      rol: "especialista en reclutamiento tecnológico"
+      ruta: "Backend"
       verbo: "analiza"
-      tipo_faltas: "faltas leves y graves"
-      termino_puntaje: "porcentaje"
-      termino_puntaje_global: "rendimiento general"
-      tipo_ejemplo: "caso práctico"
-      tipo_reflexion: "consejo formativo"
-      valor_academico: "disciplina"
+      elementos: "demanda del mercado, perfiles requeridos"
+      tono: "analítico y técnico"
+      impacto: "adaptación del estudiante al mercado laboral"
+      enfoque: "alineación entre habilidades y demanda del sector tech"
     assert:
       - type: contains
-        value: "rendimiento"
+        value: "mercado laboral"
+      - type: contains
+        value: "tendencias"
     metadata:
-      description: "Análisis con tono claro y enfoque en disciplina"
+      description: "Versión analítica del proceso de reclutamiento"
 
+  # 5️⃣ Coordinador inspirador
   - vars:
-      rol: "mentor académico"
-      tono: "afectuoso y positivo"
-      ruta: "IA y Datos"
+      rol: "coordinador académico de empleabilidad"
+      ruta: "Frontend"
+      verbo: "expone"
+      elementos: "procesos de entrevistas simuladas, preparación profesional y autoevaluación"
+      tono: "inspirador y reflexivo"
+      impacto: "capacidad del estudiante para destacar"
+      enfoque: "preparación integral y autoconfianza"
+    assert:
+      - type: contains
+        value: "entrevistas"
+      - type: contains
+        value: "destacar"
+    metadata:
+      description: "Versión inspiradora con énfasis en preparación"
+
+  # 6️⃣ Consultor de empleabilidad
+  - vars:
+      rol: "consultor de empleabilidad y desarrollo profesional"
+      ruta: "Python"
+      verbo: "detalla"
+      elementos: "acompañamiento, seguimiento postgraduación y crecimiento profesional"
+      tono: "profesional y empático"
+      impacto: "sostenibilidad de carrera del egresado"
+      enfoque: "continuidad y formación a largo plazo"
+    assert:
+      - type: contains
+        value: "seguimiento"
+      - type: contains
+        value: "graduación"
+    metadata:
+      description: "Versión consultiva con acompañamiento extendido"
+
+  # 7️⃣ Trainer aliado
+  - vars:
+      rol: "trainer aliado de empleabilidad"
+      ruta: "Data Science"
+      verbo: "comunica"
+      elementos: "preparación técnica, retos del sector y adaptación al cambio"
+      tono: "didáctico y entusiasta"
+      impacto: "autonomía, resiliencia y adaptabilidad*"
+      enfoque: "aprendizaje continuo y flexibilidad"
+    assert:
+      - type: contains
+        value: "retos"
+      - type: contains
+        value: "competitividad"
+    metadata:
+      description: "Tono entusiasta orientado a retos"
+
+  # 8️⃣ Analista laboral
+  - vars:
+      rol: "analista de empleabilidad"
+      ruta: "DevOps"
+      verbo: "presenta"
+      elementos: "indicadores de inserción laboral, retroalimentación y oportunidades de mejora"
+      tono: "objetivo y claro"
+      impacto: "mejora constante del proceso de colocación"
+      enfoque: "optimización y análisis de resultados"
+    assert:
+      - type: contains
+        value: "indicadores"
+      - type: contains
+        value: "mejora"
+    metadata:
+      description: "Versión analítica enfocada en resultados"
+
+  # 9️⃣ Orientador vocacional
+  - vars:
+      rol: "orientador vocacional"
+      ruta: "JavaScript"
       verbo: "explica"
-      tipo_faltas: "faltas leves"
-      termino_puntaje: "puntos"
-      termino_puntaje_global: "evaluación final"
-      tipo_ejemplo: "ejemplo simple"
-      tipo_reflexion: "mensaje alentador"
-      valor_academico: "constancia"
+      elementos: "autoconocimiento, proyección profesional y vocación tecnológica"
+      tono: "humano, reflexivo y motivador"
+      impacto: "decisiones conscientes sobre la carrera"
+      enfoque: "autodescubrimiento y propósito profesional"
     assert:
       - type: contains
-        value: "evaluación final"
+        value: "vocación"
+      - type: contains
+        value: "autoconocimiento"
     metadata:
-      description: "Versión empática para ruta IA y Datos"
+      description: "Versión centrada en orientación vocacional"
 
+  # 🔟 Director del área
   - vars:
-      rol: "entrenador académico"
-      tono: "energético y positivo"
+      rol: "director del área de empleabilidad"
       ruta: "Ciberseguridad"
-      verbo: "explica"
-      tipo_faltas: "faltas leves y graves"
-      termino_puntaje: "porcentaje"
-      termino_puntaje_global: "promedio general"
-      tipo_ejemplo: "simulación sencilla"
-      tipo_reflexion: "reflexión motivadora"
-      valor_academico: "compromiso"
+      verbo: "sintetiza"
+      elementos: "alianzas, procesos internos"
+      tono: "ejecutivo y estratégico"
+      impacto: "impacto institucional en el mercado laboral tech"
+      enfoque: "excelencia operativa y reputación del campus"
     assert:
       - type: contains
-        value: "promedio general"
+        value: "formación"
+      - type: contains
+        value: "impacto institucional"
     metadata:
-      description: "Caso con energía y enfoque en compromiso"
+      description: "Versión directiva enfocada en visión global del área"

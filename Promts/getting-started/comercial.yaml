@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "área Comercial - Publicidad"
+description: "Evaluación de microvariaciones del prompt del área Comercial - Publicidad y Marketing Institucional"
 
 env:
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
@@ -7,10 +7,21 @@ env:
 prompts:
   - id: "publicidad_base"
     raw: |
-      Eres un {{rol}} de Campuslands.
-      Explica {{verbo}} qué estrategias de marketing utiliza el campus para atraer a posibles campers, incluyendo {{elementos}}.
-      Usa un tono {{tono}}.
-      Menciona brevemente la importancia de {{enfoque}} en las campañas comerciales.
+      Eres un **{{rol}}** del área **Comercial y de Marketing Institucional** de **Campuslands**, una institución educativa especializada en formación intensiva en programación y habilidades tecnológicas.
+
+      Tu propósito es **{{objetivo}}**, asegurando que la marca Campuslands conecte emocionalmente con su comunidad y proyecte una imagen sólida, inspiradora y coherente con su misión formativa.
+
+      Explica **{{verbo}}** qué estrategias de **marketing educativo** utiliza el campus para atraer a posibles campers y fortalecer la fidelidad de su comunidad, incluyendo:
+      - la **{{estrategia1}}**,  
+      - la **{{estrategia2}}**,  
+      - la **{{estrategia3}}**,  
+      - y el **uso de herramientas de {{herramientas}}** que potencien la visibilidad digital y la comunicación institucional.
+
+      Describe cómo estas estrategias se alinean con la **identidad de marca** del campus, promoviendo valores como **{{valores}}**, innovación, aprendizaje continuo y transformación profesional.
+
+      Usa un tono **{{tono}}**, y resalta la importancia de la **{{enfoque}}** dentro del proceso comercial y publicitario.
+
+      Finaliza con una breve **reflexión inspiradora** sobre cómo la comunicación auténtica impulsa la misión educativa y el crecimiento de la comunidad Campuslands.
 
 providers:
   - id: google:gemini-2.5-flash
@@ -20,45 +31,202 @@ providers:
       language: "es"
 
 tests:
+  # Caso base - tono cálido e inspirador
   - vars:
       rol: "asistente comercial"
-      verbo: "de manera clara y atractiva"
-      elementos: "diseño de campañas, medios de comunicación y tendencias del público joven"
-      tono: "cálido y motivador"
-      enfoque: "conexión auténtica con futuros campers"
+      objetivo: "promover la identidad del campus y atraer nuevos talentos"
+      verbo: "de manera clara y motivadora"
+      estrategia1: "publicidad digital"
+      estrategia2: "contenido audiovisual y redes sociales"
+      estrategia3: "testimonios de campers"
+      herramientas: "marketing digital"
+      valores: "autenticidad y crecimiento"
+      tono: "cálido e inspirador"
+      enfoque: "conexión emocional y credibilidad"
     assert:
       - type: contains
-        value: "campañas"
+        value: "marketing"
       - type: contains
         value: "campers"
     metadata:
-      description: "Caso base con tono cálido y enfoque comercial"
+      description: "Caso base con tono cálido y enfoque en conexión emocional"
 
-
+  # Enfoque estratégico
   - vars:
       rol: "coordinador de marketing"
-      verbo: "de manera estructurada y profesional"
-      elementos: "estrategias de publicidad, canales de difusión"
+      objetivo: "planificar campañas efectivas y medibles"
+      verbo: "de forma estratégica y estructurada"
+      estrategia1: "análisis de mercado"
+      estrategia2: "campañas de performance"
+      estrategia3: "gestión de leads"
+      herramientas: "analítica de datos"
+      valores: "eficiencia y claridad"
       tono: "profesional y directivo"
-      enfoque: "planificación estratégica y resultados medibles"
+      enfoque: "resultados medibles y optimización continua"
     assert:
       - type: contains
         value: "estrategias"
       - type: contains
         value: "métricas"
     metadata:
-      description: "Versión con tono técnico y formal"
+      description: "Tono técnico con orientación a resultados"
 
+  # Enfoque creativo
   - vars:
-      rol: "mentor de comunicación"
-      verbo: "de forma cercana y motivadora"
-      elementos: "campañas, medios y contenidos atractivos para jóvenes"
-      tono: "cálido y alentador"
-      enfoque: "creación de vínculos y participación de los futuros campers"
+      rol: "diseñador publicitario"
+      objetivo: "crear piezas visuales que transmitan la esencia del campus"
+      verbo: "de forma artística y creativa"
+      estrategia1: "branding visual"
+      estrategia2: "storytelling digital"
+      estrategia3: "experiencias inmersivas"
+      herramientas: "diseño gráfico y edición multimedia"
+      valores: "creatividad y autenticidad"
+      tono: "creativo y emocional"
+      enfoque: "impacto visual y recordación de marca"
     assert:
       - type: contains
-        value: "participación"
+        value: "visual"
       - type: contains
-        value: "jóvenes"
+        value: "marca"
     metadata:
-      description: "Versión con tono humano y empático"
+      description: "Versión enfocada en diseño y creatividad publicitaria"
+
+  # Enfoque juvenil
+  - vars:
+      rol: "community manager"
+      objetivo: "construir una comunidad activa y conectada"
+      verbo: "de manera dinámica y cercana"
+      estrategia1: "redes sociales"
+      estrategia2: "memes, retos y tendencias digitales"
+      estrategia3: "participación en eventos estudiantiles"
+      herramientas: "plataformas sociales"
+      valores: "empatía y cercanía"
+      tono: "juvenil y fresco"
+      enfoque: "engagement y conexión con la audiencia joven"
+    assert:
+      - type: contains
+        value: "redes"
+      - type: contains
+        value: "comunidad"
+    metadata:
+      description: "Versión con tono juvenil y enfoque social"
+
+  # Enfoque institucional
+  - vars:
+      rol: "gerente comercial"
+      objetivo: "alinear las estrategias publicitarias con la visión institucional"
+      verbo: "de forma corporativa y precisa"
+      estrategia1: "alianzas estratégicas"
+      estrategia2: "posicionamiento de marca"
+      estrategia3: "planificación anual de medios"
+      herramientas: "CRM y análisis de inversión publicitaria"
+      valores: "coherencia y liderazgo"
+      tono: "institucional y directivo"
+      enfoque: "planeación estratégica y liderazgo comercial"
+    assert:
+      - type: contains
+        value: "estratégicas"
+      - type: contains
+        value: "institucional"
+    metadata:
+      description: "Versión formal e institucional"
+
+  # Enfoque emocional y humano
+  - vars:
+      rol: "mentor de comunicación"
+      objetivo: "transmitir los valores del campus desde historias reales"
+      verbo: "de manera humana y empática"
+      estrategia1: "testimonios de campers"
+      estrategia2: "campañas de propósito social"
+      estrategia3: "videos documentales"
+      herramientas: "comunicación narrativa"
+      valores: "inspiración y humanidad"
+      tono: "emocional y cercano"
+      enfoque: "historias auténticas y conexión humana"
+    assert:
+      - type: contains
+        value: "testimonios"
+      - type: contains
+        value: "historias"
+    metadata:
+      description: "Versión con énfasis en narrativa humana"
+
+  # Enfoque digital
+  - vars:
+      rol: "analista de marketing digital"
+      objetivo: "potenciar la presencia online del campus"
+      verbo: "de manera técnica y analítica"
+      estrategia1: "SEO y SEM"
+      estrategia2: "email marketing"
+      estrategia3: "automatización de campañas"
+      herramientas: "plataformas digitales"
+      valores: "precisión y mejora continua"
+      tono: "moderno y analítico"
+      enfoque: "posicionamiento digital y optimización"
+    assert:
+      - type: contains
+        value: "SEO"
+      - type: contains
+        value: "campañas"
+    metadata:
+      description: "Versión digital orientada a visibilidad online"
+
+  # Enfoque en sostenibilidad
+  - vars:
+      rol: "gestor comercial sostenible"
+      objetivo: "promover la comunicación responsable"
+      verbo: "de forma ética y educativa"
+      estrategia1: "campañas ecológicas"
+      estrategia2: "alianzas con marcas sostenibles"
+      estrategia3: "contenido responsable"
+      herramientas: "marketing verde"
+      valores: "responsabilidad y conciencia"
+      tono: "reflexivo y ético"
+      enfoque: "sostenibilidad y responsabilidad social"
+    assert:
+      - type: contains
+        value: "sostenible"
+      - type: contains
+        value: "ecológicas"
+    metadata:
+      description: "Versión con enfoque en sostenibilidad comercial"
+
+  # Enfoque internacional
+  - vars:
+      rol: "representante de expansión internacional"
+      objetivo: "posicionar Campuslands fuera del país"
+      verbo: "de forma estratégica y cultural"
+      estrategia1: "alianzas internacionales"
+      estrategia2: "campañas globales"
+      estrategia3: "testimonios bilingües"
+      herramientas: "marketing intercultural"
+      valores: "diversidad y apertura"
+      tono: "internacional y profesional"
+      enfoque: "expansión y presencia global"
+    assert:
+      - type: contains
+        value: "internacional"
+      - type: contains
+        value: "expansión"
+    metadata:
+      description: "Versión global con enfoque en internacionalización"
+
+  # Enfoque de datos y métricas
+  - vars:
+      rol: "analista comercial"
+      objetivo: "evaluar el impacto de las campañas"
+      verbo: "de forma técnica y cuantitativa"
+      estrategia1: "análisis de métricas"
+      estrategia2: "A/B testing"
+      estrategia3: "seguimiento de leads"
+      herramientas: "tableros de datos"
+      valores: "precisión y mejora continua"
+      tono: "técnico y objetivo"
+      enfoque: "análisis de datos y ROI"
+    assert:
+      - type: contains
+        value: "métricas"
+      - type: contains
+        value: "datos"
+    metadata:
+      description: "Tono técnico con enfoque analítico"

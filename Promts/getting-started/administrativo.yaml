@@ -1,75 +1,222 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación de microvariaciones del prompt del área Administrativa - Logística"
-
+description: "Evaluación del área Administrativa y Logística"
 
 env:
- GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
-
+  GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
- - id: "logistica_base"
-   raw: |
-    Eres un {{rol}} de Campuslands.
-    Explica {{verbo}} cómo se gestiona la logística dentro del campus, incluyendo {{elementos}}.
-    Usa un tono {{tono}}.
-    Menciona brevemente la importancia de la {{enfoque}} en el proceso.
+  - id: "logistica_base"
+    raw: |
+      Eres un **{{rol}}** del área **Administrativa y Logística** de **Campuslands**, una institución especializada en formación en programación y desarrollo tecnológico.
 
+      Tu objetivo principal es **{{objetivo}}**, garantizando que las operaciones internas del campus funcionen con eficiencia, orden y coordinación entre todas las áreas.
+
+      Explica **{{verbo}}** cómo se gestiona la **logística administrativa** dentro del campus, incluyendo:
+      - la **planificación y ejecución** de **{{procesos}}**,  
+      - la **gestión de recursos y suministros**,  
+      - la **coordinación de espacios y eventos**,  
+      - y el **soporte operativo** para entrenadores, campers y personal administrativo.
+
+      Describe con claridad cómo se utilizan los **{{recursos}}** disponibles y de qué forma la **{{interaccion}}** con otras áreas (como académica, bienestar y tecnología) contribuye a mantener un entorno funcional y colaborativo.
+
+      Usa un tono **{{tono}}** y asegúrate de resaltar la importancia de la **{{enfoque}}** en el proceso.
+
+      Finaliza con una breve **reflexión institucional** sobre cómo una buena gestión administrativa impulsa la **{{impacto}}** y fortalece la misión educativa de Campuslands.
 
 providers:
- - id: google:gemini-2.5-flash
-   config:
-     temperature: 0.7
-     top_p: 1.0
-     language: "es"
-
+  - id: google:gemini-2.5-flash
+    config:
+      temperature: 0.7
+      top_p: 1.0
+      language: "es"
 
 tests:
+  # Caso base - tono cálido y cooperativo
+  - vars:
+      rol: "coordinador logístico"
+      objetivo: "mantener la eficiencia y bienestar institucional"
+      verbo: "de forma clara y cercana"
+      procesos: "inventarios, compras y mantenimiento"
+      recursos: "recursos materiales y humanos"
+      interaccion: "colaboración entre departamentos"
+      tono: "cálido y cooperativo"
+      enfoque: "organización y eficiencia"
+      impacto: "productividad y ambiente de aprendizaje"
+    assert:
+      - type: contains
+        value: "logística"
+      - type: contains
+        value: "Campuslands"
+    metadata:
+      description: "Caso base con tono cálido y enfoque colaborativo"
 
- - vars:
-     rol: "asistente administrativo"
-     verbo: "de forma clara y ordenada"
-     elementos: "reuniones, coordinación de espacios y suministros"
-     tono: "profesional y cercano"
-     enfoque: "organización y eficiencia"
-   assert:
-     - type: contains
-       value: "reuniones"
-     - type: contains
-       value: "suministros"
-   metadata:
-     description: "Caso base con tono neutro y enfoque administrativo"
+  # Tono formal y técnico
+  - vars:
+      rol: "gestor de operaciones"
+      objetivo: "optimizar procesos y garantizar el flujo interno"
+      verbo: "de manera técnica y estructurada"
+      procesos: "gestión de mantenimiento, compras y distribución"
+      recursos: "recursos financieros y tecnológicos"
+      interaccion: "comunicación interdepartamental"
+      tono: "formal y profesional"
+      enfoque: "eficiencia y transparencia"
+      impacto: "rendimiento operativo y cumplimiento institucional"
+    assert:
+      - type: contains
+        value: "eficiencia"
+      - type: contains
+        value: "transparencia"
+    metadata:
+      description: "Versión técnica con enfoque en resultados"
 
+  # Tono motivador y humano
+  - vars:
+      rol: "auxiliar administrativo"
+      objetivo: "brindar apoyo y asegurar el buen funcionamiento diario"
+      verbo: "de forma empática y motivadora"
+      procesos: "asignación de espacios, recepción y atención"
+      recursos: "recursos humanos y de atención"
+      interaccion: "coordinación con bienestar y trainers"
+      tono: "motivador y humano"
+      enfoque: "bienestar y servicio"
+      impacto: "armonía laboral y desarrollo humano"
+    assert:
+      - type: contains
+        value: "bienestar"
+      - type: contains
+        value: "armonía"
+    metadata:
+      description: "Tono humano enfocado en bienestar institucional"
 
- - vars:
-     rol: "asesor de gestión administrativa"
-     verbo: "de manera estructurada y profesional"
-     elementos: "agenda de reuniones, coordinación y recursos"
-     tono: "profesional y directivo"
-     enfoque: "planificación estratégica"
-   assert:
-     - type: contains
-       value: "coordinación"
-     - type: contains
-       value: "recursos"
-   metadata:
-     description: "Versión con tono más técnico y formal"
+  # Enfoque ambiental y sostenible
+  - vars:
+      rol: "encargado de recursos generales"
+      objetivo: "asegurar una gestión sostenible de los recursos"
+      verbo: "de forma responsable y educativa"
+      procesos: "reciclaje, consumo energético y mantenimiento ecológico"
+      recursos: "recursos naturales y materiales"
+      interaccion: "integración con el área de tecnología y bienestar"
+      tono: "reflexivo y ambiental"
+      enfoque: "sostenibilidad y conciencia ambiental"
+      impacto: "cuidado ambiental y cultura responsable"
+    assert:
+      - type: contains
+        value: "sostenible"
+      - type: contains
+        value: "reciclaje"
+    metadata:
+      description: "Enfoque ambiental y responsable"
 
+  # Tono institucional
+  - vars:
+      rol: "administrador general"
+      objetivo: "dirigir las operaciones y fortalecer la gestión institucional"
+      verbo: "de manera estratégica y corporativa"
+      procesos: "planeación, control interno y asignación presupuestal"
+      recursos: "recursos financieros y humanos"
+      interaccion: "trabajo conjunto con dirección académica"
+      tono: "institucional y directivo"
+      enfoque: "gestión estratégica"
+      impacto: "fortalecimiento institucional y calidad educativa"
+    assert:
+      - type: contains
+        value: "gestión"
+      - type: contains
+        value: "estratégica"
+    metadata:
+      description: "Tono directivo con enfoque institucional"
 
+  # Tono joven y moderno
+  - vars:
+      rol: "asistente logístico"
+      objetivo: "mantener la organización diaria del campus"
+      verbo: "de forma dinámica y moderna"
+      procesos: "control de inventarios y programación de eventos"
+      recursos: "recursos digitales y físicos"
+      interaccion: "colaboración con equipos de aprendizaje"
+      tono: "moderno y juvenil"
+      enfoque: "innovación y eficiencia"
+      impacto: "productividad y trabajo colaborativo"
+    assert:
+      - type: contains
+        value: "innovación"
+      - type: contains
+        value: "eficiencia"
+    metadata:
+      description: "Versión con tono joven e innovador"
 
- - vars:
-     rol: "mentor institucional"
-     verbo: "de forma cercana y motivadora"
-     elementos: "reuniones, espacios y suministros para el bienestar de los campers"
-     tono: "cálido y alentador"
-     enfoque: "comunidad y eficiencia"
-   assert:
-     - type: contains
-       value: "bienestar"
-     - type: contains
-       value: "reuniones"
-   metadata:
-     description: "Versión con tono humano y empático"
+  # Enfoque comunicativo
+  - vars:
+      rol: "coordinador administrativo"
+      objetivo: "garantizar la comunicación fluida entre áreas"
+      verbo: "de forma clara y diplomática"
+      procesos: "atención interna, correos institucionales, reuniones"
+      recursos: "recursos comunicativos y tecnológicos"
+      interaccion: "comunicación constante con dirección y campers"
+      tono: "cordial y profesional"
+      enfoque: "comunicación efectiva"
+      impacto: "coordinación y entendimiento entre equipos"
+    assert:
+      - type: contains
+        value: "comunicación"
+      - type: contains
+        value: "coordinación"
+    metadata:
+      description: "Caso con énfasis en comunicación interdepartamental"
 
+  # Enfoque de bienestar institucional
+  - vars:
+      rol: "gestor de bienestar y logística"
+      objetivo: "promover el bienestar institucional a través de la logística"
+      verbo: "de forma cercana y empática"
+      procesos: "eventos internos, pausas activas y gestión de espacios"
+      recursos: "recursos recreativos y humanos"
+      interaccion: "trabajo conjunto con bienestar y psicología"
+      tono: "amigable y humano"
+      enfoque: "bienestar y convivencia"
+      impacto: "motivación y armonía institucional"
+    assert:
+      - type: contains
+        value: "bienestar"
+      - type: contains
+        value: "armonía"
+    metadata:
+      description: "Tono enfocado en bienestar y convivencia"
 
+  # Enfoque en innovación tecnológica
+  - vars:
+      rol: "gestor tecnológico administrativo"
+      objetivo: "implementar soluciones digitales en los procesos administrativos"
+      verbo: "de manera técnica y proactiva"
+      procesos: "automatización, control digital de inventarios y sistemas"
+      recursos: "recursos tecnológicos"
+      interaccion: "coordinación con soporte TI y logística"
+      tono: "técnico y moderno"
+      enfoque: "digitalización y eficiencia"
+      impacto: "transformación digital del campus"
+    assert:
+      - type: contains
+        value: "tecnológicos"
+      - type: contains
+        value: "digital"
+    metadata:
+      description: "Versión con enfoque tecnológico y digital"
 
-
+  # Tono reflexivo y ético
+  - vars:
+      rol: "asistente de gestión administrativa"
+      objetivo: "fortalecer la ética y transparencia en los procesos internos"
+      verbo: "de manera reflexiva y clara"
+      procesos: "control de gastos, registro y rendición de cuentas"
+      recursos: "recursos económicos y documentales"
+      interaccion: "coordinación con área contable"
+      tono: "ético y transparente"
+      enfoque: "responsabilidad institucional"
+      impacto: "confianza y credibilidad organizacional"
+    assert:
+      - type: contains
+        value: "transparencia"
+      - type: contains
+        value: "responsabilidad"
+    metadata:
+      description: "Tono reflexivo y ético con enfoque en transparencia"

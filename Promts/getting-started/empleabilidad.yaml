@@ -1,17 +1,32 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación área de Empleabilidad"
+description: "Evaluación área de Empleabilidad - Preparación y acompañamiento laboral en Campuslands"
 
 env:
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
-  - id: "empleabilidad_base"
+  - id: "empleabilidad_extendido"
     raw: |
-      Eres un {{rol}} de Campuslands.
-      Soy un estudiante de programación en la ruta NodeJS.
-      Explica {{verbo}} por qué el proceso de empleabilidad es uno de los principales diferenciales del campus, incluyendo {{elementos}}.
-      Usa un tono {{tono}}.
-      Menciona brevemente la importancia de {{enfoque}} en la preparación laboral del estudiante.
+      Eres un {{rol}} del área de **Empleabilidad** de Campuslands, una institución reconocida por su enfoque integral en la formación de programadores.
+
+      Responde siempre en **español de Colombia**, con un tono **{{tono}}**, adaptado al contexto y nivel del estudiante.
+
+      Estoy cursando la ruta **{{ruta}}**, y quiero entender mejor cómo funciona el proceso de **empleabilidad** dentro del campus.
+
+      Tu tarea es **{{verbo}}** de manera **clara, estructurada y empática** los diferentes aspectos que componen el proceso de empleabilidad, incluyendo:
+      - **{{elementos}}**.
+      - La preparación previa (hojas de vida, entrevistas, habilidades blandas, simulaciones y pruebas técnicas).
+      - El acompañamiento de mentores y el seguimiento después de la graduación.
+      - La conexión directa con empresas y el rol del área de reclutamiento tecnológico.
+
+      Explica también cómo estos elementos contribuyen al **{{impacto}}** del estudiante en su transición hacia el entorno laboral y cómo fortalecen su perfil profesional.
+
+      Menciona brevemente la importancia de la **{{enfoque}}** en la preparación laboral, y cómo se promueve la **autonomía, resiliencia y adaptabilidad** en cada camper.
+
+      Si no te doy datos específicos sobre mi proceso o mis metas profesionales, ofrece un **ejemplo práctico y motivador** que ilustre cómo Campuslands impulsa a sus estudiantes hacia el éxito profesional.
+
+      Finaliza con una **reflexión inspiradora** sobre el valor de la constancia y la preparación en la búsqueda de empleo en el sector tecnológico.
+
 
 providers:
   - id: google:gemini-2.5-flash
@@ -20,52 +35,93 @@ providers:
       top_p: 1.0
       language: "es"
 
+
 tests:
-  # Caso base
+  # Caso base - Tono cálido y motivador
   - vars:
       rol: "asistente de empleabilidad"
-      verbo: "de manera clara y cercana"
-      elementos: "Oportunidades Laborales, crecimiento personal y profesional"
-      tono: "cercano y motivador"
-      enfoque: "proyección y preparación para el mundo laboral"
+      ruta: "NodeJS"
+      verbo: "explica"
+      elementos: "oportunidades laborales, networking y desarrollo profesional"
+      tono: "cálido, cercano y motivador"
+      impacto: "crecimiento personal y laboral"
+      enfoque: "preparación continua y mentalidad profesional"
     assert:
       - type: contains
         value: "empleabilidad"
       - type: contains
         value: "oportunidades laborales"
+      - type: contains
+        value: "preparación"
     metadata:
-      description: "Caso base con tono cálido y enfoque motivador"
+      description: "Caso base con tono cálido y motivador"
 
-  # Variación 1 - tono directivo
+  # Tono formal y estratégico
   - vars:
       rol: "coordinador de empleabilidad"
-      verbo: "de manera estructurada y profesional"
-      elementos: "procesos de inserción laboral, preparación profesional y evaluación de competencias"
-      tono: "profesional y directivo"
-      enfoque: "resultados medibles y desarrollo de habilidades"
+      ruta: "Full Stack"
+      verbo: "describe"
+      elementos: "alianzas empresariales, procesos de selección y métricas de empleabilidad"
+      tono: "profesional y estratégico"
+      impacto: "posicionamiento laboral de los egresados"
+      enfoque: "evaluación de resultados y vinculación con empresas"
     assert:
       - type: contains
-        value: "competencias"
+        value: "alianzas"
       - type: contains
-        value: "evaluación"
+        value: "selección"
+      - type: contains
+        value: "empresas"
     metadata:
       description: "Versión con tono técnico y formal"
 
-  # Variación 2 - tono empático
+  # Mentor empático
   - vars:
       rol: "mentor de empleabilidad"
-      verbo: "de forma cercana y alentadora"
-      elementos: "preparación, confianza y acompañamiento en la búsqueda laboral"
-      tono: "cálido y motivador"
-      enfoque: "seguridad y crecimiento personal del estudiante"
+      ruta: "Java"
+      verbo: "orienta"
+      elementos: "preparación emocional, acompañamiento y fortalecimiento de habilidades blandas"
+      tono: "humano y alentador"
+      impacto: "confianza del estudiante en su inserción laboral"
+      enfoque: "acompañamiento personalizado y desarrollo emocional"
     assert:
       - type: contains
-        value: "confianza"
-      - type: contains
         value: "acompañamiento"
+      - type: contains
+        value: "confianza"
     metadata:
-      description: "Versión con tono humano y empático"
+      description: "Versión con tono empático y cercano"
 
+  # Especialista técnico
+  - vars:
+      rol: "especialista en reclutamiento tecnológico"
+      ruta: "Backend"
+      verbo: "analiza"
+      elementos: "demanda del mercado, tendencias de contratación y perfil técnico requerido"
+      tono: "analítico y experto"
+      impacto: "adaptación del estudiante al mercado laboral"
+      enfoque: "alineación entre habilidades y necesidades del sector tech"
+    assert:
+      - type: contains
+        value: "mercado laboral"
+      - type: contains
+        value: "perfil técnico"
+    metadata:
+      description: "Versión técnica enfocada en reclutamiento"
 
-
-
+  # Coordinador inspirador
+  - vars:
+      rol: "coordinador académico de empleabilidad"
+      ruta: "Frontend"
+      verbo: "expone"
+      elementos: "procesos de simulación de entrevistas, acompañamiento y presentación profesional"
+      tono: "inspirador y claro"
+      impacto: "capacidad del estudiante para destacar en procesos de selección"
+      enfoque: "preparación integral y seguridad profesional"
+    assert:
+      - type: contains
+        value: "entrevistas"
+      - type: contains
+        value: "destacar"
+    metadata:
+      description: "Versión inspiradora con énfasis en preparación profesional"
