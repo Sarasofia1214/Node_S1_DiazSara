@@ -1,16 +1,16 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-description: "Evaluación de microvariaciones del prompt del área Administrativa - Logística"
+description: "área Comercial - Publicidad"
 
 env:
   GEMINI_API_KEY: AIzaSyDd_6Nbxg7FOPjFL3OH6MTZET7gTXNxLlo
 
 prompts:
-  - id: "logistica_base"
+  - id: "publicidad_base"
     raw: |
       Eres un {{rol}} de Campuslands.
-      Explica {{verbo}} cómo se gestiona la logística dentro del campus, incluyendo {{elementos}}.
+      Explica {{verbo}} qué estrategias de marketing utiliza el campus para atraer a posibles campers, incluyendo {{elementos}}.
       Usa un tono {{tono}}.
-      Menciona brevemente la importancia de la {{enfoque}} en el proceso.
+      Menciona brevemente la importancia de {{enfoque}} en las campañas comerciales.
 
 providers:
   - id: google:gemini-2.5-flash
@@ -20,48 +20,45 @@ providers:
       language: "es"
 
 tests:
-  # Caso base
   - vars:
-      rol: "asistente administrativo"
-      verbo: "de forma clara y ordenada"
-      elementos: "reuniones, coordinación de espacios y suministros"
-      tono: "profesional y cercano"
-      enfoque: "organización y eficiencia"
+      rol: "asistente comercial"
+      verbo: "de manera clara y atractiva"
+      elementos: "diseño de campañas, medios de comunicación y tendencias del público joven"
+      tono: "cálido y motivador"
+      enfoque: "conexión auténtica con futuros campers"
     assert:
       - type: contains
-        value: "reuniones"
+        value: "campañas"
       - type: contains
-        value: "suministros"
+        value: "campers"
     metadata:
-      description: "Caso base con tono neutro y enfoque administrativo"
+      description: "Caso base con tono cálido y enfoque comercial"
 
-  # Variación 1 - tono directivo
+
   - vars:
-      rol: "asesor de gestión administrativa"
+      rol: "coordinador de marketing"
       verbo: "de manera estructurada y profesional"
-      elementos: "agenda de reuniones, coordinación y recursos"
+      elementos: "estrategias de publicidad, canales de difusión"
       tono: "profesional y directivo"
-      enfoque: "planificación estratégica"
+      enfoque: "planificación estratégica y resultados medibles"
     assert:
       - type: contains
-        value: "coordinación"
+        value: "estrategias"
       - type: contains
-        value: "recursos"
+        value: "métricas"
     metadata:
-      description: "Versión con tono más técnico y formal"
+      description: "Versión con tono técnico y formal"
 
-  # Variación 2 - tono empático
   - vars:
-      rol: "mentor institucional"
+      rol: "mentor de comunicación"
       verbo: "de forma cercana y motivadora"
-      elementos: "reuniones, espacios y suministros para el bienestar de los campers"
+      elementos: "campañas, medios y contenidos atractivos para jóvenes"
       tono: "cálido y alentador"
-      enfoque: "comunidad y eficiencia"
+      enfoque: "creación de vínculos y participación de los futuros campers"
     assert:
       - type: contains
-        value: "bienestar"
+        value: "participación"
       - type: contains
-        value: "reuniones"
+        value: "jóvenes"
     metadata:
       description: "Versión con tono humano y empático"
-
